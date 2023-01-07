@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fitappproject.MainViewController">
+   <children>
+      <Pane prefHeight="500.0" prefWidth="180.0">
+         <children>
+            <Button fx:id="button_bmi" layoutY="14.0" mnemonicParsing="false" onAction="#obliczBMIAction" prefHeight="44.0" prefWidth="180.0" text="Oblicz BMI">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button fx:id="button_wyjscie" layoutY="442.0" mnemonicParsing="false" onAction="#wyjscieAction" prefHeight="44.0" prefWidth="180.0" text="Wyjście">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button fx:id="button_zaloguj" layoutY="383.0" mnemonicParsing="false" onAction="#zalogujAction" prefHeight="44.0" prefWidth="180.0" text="Zaloguj się">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <MenuButton fx:id="menu_kalorycznosc" layoutY="71.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="180.0" text="Oblicz kaloryczność posiłków" textAlignment="CENTER" wrapText="true">
+              <items>
+                <MenuItem fx:id="menuOpt_plik" disable="true" mnemonicParsing="false" onAction="#wczytajDaneZPlikuAction" text="Wczytaj dane z pliku" />
+                <MenuItem fx:id="menuOpt_baza" disable="true" mnemonicParsing="false" onAction="#wybierzZBazyAction" text="Wybierz z bazy" />
+              </items>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </MenuButton>
+            <Button fx:id="button_wyloguj" layoutY="377.0" mnemonicParsing="false" onAction="#wylogujAction" prefHeight="44.0" prefWidth="180.0" text="Wyloguj">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane layoutX="195.0" prefHeight="500.0" prefWidth="505.0" />
+   </children>
+</AnchorPane>
