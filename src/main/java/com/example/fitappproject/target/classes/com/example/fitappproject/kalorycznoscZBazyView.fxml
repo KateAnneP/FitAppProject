@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fitappproject.KalorycznoscZBazyViewController">
+    <children>
+        <Pane fx:id="pane" prefHeight="500.0" prefWidth="180.0">
+            <children>
+                <Button fx:id="button_bmi" layoutY="14.0" mnemonicParsing="false" onAction="#obliczBMIAction" prefHeight="44.0" prefWidth="180.0" text="Oblicz BMI">
+                    <font>
+                        <Font size="14.0" />
+                    </font></Button>
+                <Button fx:id="button_wyjscie" layoutY="442.0" mnemonicParsing="false" onAction="#wyjscieAction" prefHeight="44.0" prefWidth="180.0" text="Wyjście">
+                    <font>
+                        <Font size="14.0" />
+                    </font></Button>
+                <Button fx:id="button_wyloguj" layoutY="383.0" mnemonicParsing="false" onAction="#wylogujAction" prefHeight="44.0" prefWidth="180.0" text="Wyloguj">
+                    <font>
+                        <Font size="14.0" />
+                    </font></Button>
+                <MenuButton fx:id="menu_kalorycznosc" layoutY="71.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="180.0" text="Oblicz kaloryczność posiłków" textAlignment="CENTER" wrapText="true">
+                    <items>
+                        <MenuItem fx:id="menuOpt_plik" disable="true" mnemonicParsing="false" onAction="#wczytajDaneZPlikuAction" text="Wczytaj dane z pliku" />
+                        <MenuItem fx:id="menuOpt_baza" disable="true" mnemonicParsing="false" onAction="#wybierzZBazyAction" text="Wybierz z bazy" />
+                    </items>
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </MenuButton>
+            </children>
+        </Pane>
+        <Pane fx:id="pane1" layoutX="195.0" prefHeight="500.0" prefWidth="505.0">
+         <children>
+            <TableView fx:id="tabela_dane" layoutX="20.0" layoutY="21.0" prefHeight="453.0" prefWidth="305.0">
+              <columns>
+                <TableColumn fx:id="kolumna_nazwa" editable="false" prefWidth="149.0" text="nazwa [jednostka]" />
+                <TableColumn fx:id="kolumna_kalorie" editable="false" prefWidth="88.0" text="kaloryczność" />
+                  <TableColumn fx:id="kolumna_ilosc" editable="false" prefWidth="75.0" text="ilość" />
+              </columns>
+            </TableView>
+            <Button fx:id="button_oblicz" layoutX="342.0" layoutY="84.0" mnemonicParsing="false" onAction="#obliczAction" prefHeight="44.0" prefWidth="141.0" text="Oblicz">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Label fx:id="label_wynik" layoutX="341.0" layoutY="148.0" prefHeight="95.0" prefWidth="141.0" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="button_dodaj" layoutX="340.0" layoutY="21.0" mnemonicParsing="false" onAction="#dodajAction" prefHeight="44.0" prefWidth="141.0" text="Dodaj">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Label fx:id="label_opis" layoutX="342.0" layoutY="391.0" prefHeight="83.0" prefWidth="141.0" wrapText="true" />
+            <Button fx:id="button_wyczysc" layoutX="342.0" layoutY="315.0" mnemonicParsing="false" onAction="#wyczyscAction" prefHeight="44.0" prefWidth="141.0" text="Wyczyść tabelę">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children></Pane>
+    </children>
+</AnchorPane>
