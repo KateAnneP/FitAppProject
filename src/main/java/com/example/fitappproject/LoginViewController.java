@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,6 +23,9 @@ import java.util.ResourceBundle;
 
 public class LoginViewController implements Initializable {
 
+    @FXML public AnchorPane anchorPane;
+    @FXML public Pane pane;
+    @FXML public Pane pane1;
     @FXML public MenuItem menuOpt_baza;
     @FXML public MenuItem menuOpt_plik;
     @FXML public MenuButton menu_kalorycznosc;
@@ -30,7 +35,7 @@ public class LoginViewController implements Initializable {
     @FXML public TextField field_login;
     @FXML public PasswordField field_passwd;
 
-    public String login, password;
+    public static String login, password;
     public int id = 0;
     public boolean emptyPasswd = true, emptyLogin = true;
 
@@ -43,6 +48,7 @@ public class LoginViewController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("FitApp");
+        scene.getStylesheets().add("style.css");
         stage.show();
     }
 
@@ -60,6 +66,7 @@ public class LoginViewController implements Initializable {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("FitApp");
+            scene.getStylesheets().add("style.css");
             stage.show();
         }
     }
@@ -75,16 +82,17 @@ public class LoginViewController implements Initializable {
                 MainApplication.zalogowane = true;
             }
             else {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Błąd!");
-                alert.setHeaderText(null);
-                alert.setContentText("Nieprawidłowe dane logowania!");
-                alert.showAndWait();
+
             }
         }
         catch(SQLException e)
         {
             System.out.println("Nie można odnaleźć użytkownika w bazie");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Błąd!");
+            alert.setHeaderText(null);
+            alert.setContentText("Nieprawidłowe dane logowania!");
+            alert.showAndWait();
         }
     }
 
@@ -113,7 +121,9 @@ public class LoginViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        anchorPane.getStyleClass().add("anchorPane");
+        pane.getStyleClass().add("pane");
+        pane1.getStyleClass().add("pane");
         Tooltip tooltip1 = new Tooltip("Te opcje są dostępne po zalogowaniu");
         menu_kalorycznosc.setTooltip(tooltip1);
 

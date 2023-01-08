@@ -12,9 +12,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -23,8 +30,11 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class KalorycznoscZBazyViewController implements Initializable {
-    @FXML
-    public MenuItem menuOpt_baza;
+
+    @FXML public Pane pane;
+    @FXML public Pane pane1;
+    @FXML public AnchorPane anchorPane;
+    @FXML public MenuItem menuOpt_baza;
     @FXML public MenuItem menuOpt_plik;
     @FXML public MenuButton menu_kalorycznosc;
     @FXML public Button button_zaloguj;
@@ -34,7 +44,9 @@ public class KalorycznoscZBazyViewController implements Initializable {
     @FXML public TableView tabela_dane;
     @FXML public TableColumn kolumna_nazwa;
     @FXML public TableColumn kolumna_kalorie;
+    @FXML public TableColumn kolumna_ilosc;
     @FXML public Button button_oblicz;
+    @FXML public Button button_wyczysc;
     @FXML public Label label_wynik;
     @FXML public Button button_dodaj;
     @FXML public Label label_opis;
@@ -43,6 +55,8 @@ public class KalorycznoscZBazyViewController implements Initializable {
 
     ObservableList<Potrawa> potrawyDoTabeli = FXCollections.observableArrayList();
 
+    public static int suma = 0;
+
     @FXML
     public void obliczBMIAction(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("bmiView.fxml"));
@@ -50,6 +64,7 @@ public class KalorycznoscZBazyViewController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("FitApp");
+        scene.getStylesheets().add("style.css");
         stage.show();
     }
 
@@ -66,17 +81,29 @@ public class KalorycznoscZBazyViewController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("FitApp");
+        scene.getStylesheets().add("style.css");
         stage.show();
     }
 
     @FXML
     public void wczytajDaneZPlikuAction(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("kalorycznoscZPlikuView.fxml"));
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("kalorycznoscZPlikuView.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
+        Stage stage = (Stage)anchorPane.getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle("FitApp");
+        scene.getStylesheets().add("style.css");
         stage.show();
+    }
+
+    @FXML
+    public void wyczyscAction(ActionEvent actionEvent)
+    {
+        MainApplication.id_wybranych.clear();
+        tabela_dane.refresh();
+        suma = 0;
     }
 
     public void dodajAction(ActionEvent actionEvent) throws IOException {
@@ -85,19 +112,30 @@ public class KalorycznoscZBazyViewController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("FitApp");
+        scene.getStylesheets().add("style.css");
         stage.show();
     }
 
     public void obliczAction(ActionEvent actionEvent) {
-        int idP;
-        for (Potrawa p: potrawyDoTabeli)
-        //zapisz do tabeli id_wybranych tez nazwy, kalorie i id tych potraw, to będzie je łatwiej uzyskac
+        int ilosc, idP;
+        double kalorie;
+        for (Wybrana_potrawa p: MainApplication.id_wybranych)
         {
-            MainApplication.suma += (MainApplication.potrawy.get(p.getId()).getKalorie()*MainApplication.id_wybranych.get(p.getId()).getIlosc());
-            System.out.println("Kalorie: " + MainApplication.potrawy.get(p.getId()).getKalorie());
-            System.out.println("Ilość: " + MainApplication.id_wybranych.get(p.getId()).getIlosc());
+            kalorie = p.getKalorie()/100.0;
+            ilosc = p.getIlosc();
+            suma += kalorie*ilosc;
+            System.out.println("Kalorie: " + kalorie);
+            System.out.println("Ilość: " + ilosc);
         }
-        label_wynik.setText("Suma spożytych kalorii wynosi: " + MainApplication.suma);
+        if (suma == 0 && MainApplication.id_wybranych.isEmpty()) {
+            label_wynik.setText("Brak danych w tabeli.");
+            Color color = Color.RED;
+            label_wynik.setTextFill(color);
+        }
+        else
+            label_wynik.setText("Suma spożytych kalorii wynosi: " + suma);
+
+
     }
 
     @FXML
@@ -106,38 +144,34 @@ public class KalorycznoscZBazyViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        anchorPane.getStyleClass().add("anchorPane");
+        pane.getStyleClass().add("pane");
+        pane1.getStyleClass().add("pane");
+        MainApplication.otworzen++;
         menuOpt_plik.setDisable(false);
         menuOpt_baza.setDisable(true);
 
         int id, kalorie;
         String nazwa, jednostka, nazwa_jedn;
-        try {
-            ResultSet dane = baza.getResult("SELECT potrawy.id,potrawy.nazwa,potrawy.jednostka,jednostki.skrot,kalorycznosc FROM potrawy JOIN jednostki ON potrawy.jednostka = jednostki.id");
-            while(dane.next())
-            {
-                id = dane.getInt(1);
-                nazwa = dane.getString(2);
-                jednostka = dane.getString(4);
-                nazwa_jedn = nazwa + " [" + jednostka + "]";
-                kalorie = dane.getInt(5);
-                MainApplication.potrawy.add(new Potrawa(id,nazwa_jedn,kalorie));
+        if (MainApplication.otworzen == 1) {
+            try {
+                ResultSet dane = baza.getResult("SELECT potrawy.id,potrawy.nazwa,potrawy.jednostka,jednostki.skrot,kalorycznosc FROM potrawy JOIN jednostki ON potrawy.jednostka = jednostki.id");
+                while (dane.next()) {
+                    id = dane.getInt(1);
+                    nazwa = dane.getString(2);
+                    jednostka = dane.getString(4);
+                    nazwa_jedn = nazwa + " [" + jednostka + "]";
+                    kalorie = dane.getInt(5);
+                    MainApplication.potrawy.add(new Potrawa(id, nazwa_jedn, kalorie));
+                }
+            } catch (SQLException e) {
+                System.out.println("Nie można uzyskać danych z bazy");
             }
         }
-        catch(SQLException e)
-        {
-            System.out.println("Nie można uzyskać danych z bazy");
-        }
 
-        int idP;
-
-        for ( Wybrana_potrawa p : MainApplication.id_wybranych)
-        {
-            idP = p.getId();
-            potrawyDoTabeli.add(new Potrawa(MainApplication.potrawy.get(idP).getId(),MainApplication.potrawy.get(idP).getNazwa(),MainApplication.potrawy.get(idP).getKalorie()));
-        }
-        tabela_dane.itemsProperty().setValue(potrawyDoTabeli);
+        tabela_dane.itemsProperty().setValue(MainApplication.id_wybranych);
         kolumna_nazwa.setCellValueFactory(new PropertyValueFactory<Potrawa, String>("nazwa"));
         kolumna_kalorie.setCellValueFactory(new PropertyValueFactory<Potrawa, String>("kalorie"));
+        kolumna_ilosc.setCellValueFactory(new PropertyValueFactory<Wybrana_potrawa, String>("ilosc"));
     }
-
 }

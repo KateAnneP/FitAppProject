@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fitappproject.LoginViewController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fitappproject.LoginViewController">
    <children>
-      <Pane prefHeight="500.0" prefWidth="180.0">
+      <Pane fx:id="pane" prefHeight="500.0" prefWidth="180.0">
          <children>
             <Button fx:id="button_bmi" layoutY="14.0" mnemonicParsing="false" onAction="#obliczBMIAction" prefHeight="44.0" prefWidth="180.0" text="Oblicz BMI">
                <font>
@@ -27,7 +27,7 @@
             </MenuButton>
          </children>
       </Pane>
-      <Pane layoutX="195.0" prefHeight="500.0" prefWidth="505.0">
+      <Pane fx:id="pane1" layoutX="195.0" prefHeight="500.0" prefWidth="505.0">
          <children>
             <Button fx:id="button_login" disable="true" layoutX="158.0" layoutY="372.0" mnemonicParsing="false" onAction="#zalogujAction" prefHeight="44.0" prefWidth="180.0" text="Zaloguj">
                <font>

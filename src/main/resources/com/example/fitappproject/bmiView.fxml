@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fitappproject.BmiViewController">
+<AnchorPane fx:id="anchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fitappproject.BmiViewController">
     <children>
-        <Pane prefHeight="500.0" prefWidth="180.0">
+        <Pane fx:id="pane" prefHeight="500.0" prefWidth="180.0">
             <children>
                 <Button fx:id="button_bmi" layoutY="14.0" mnemonicParsing="false" onAction="#obliczBMIAction" prefHeight="44.0" prefWidth="180.0" text="Oblicz BMI">
                     <font>
@@ -29,11 +29,16 @@
                         <Font size="14.0" />
                     </font>
                 </MenuButton>
+                <Button fx:id="button_wyloguj" layoutY="377.0" mnemonicParsing="false" onAction="#wylogujAction" prefHeight="44.0" prefWidth="180.0" text="Wyloguj">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
             </children>
         </Pane>
-        <Pane layoutX="195.0" prefHeight="500.0" prefWidth="505.0">
+        <Pane fx:id="pane1" layoutX="195.0" prefHeight="500.0" prefWidth="505.0">
          <children>
-            <Label fx:id="label_opis" layoutX="28.0" layoutY="311.0" prefHeight="20.0" prefWidth="39.0">
+            <Label fx:id="label_opis" layoutX="28.0" layoutY="311.0" prefHeight="90.0" prefWidth="369.0" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font></Label>
@@ -61,7 +66,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="label_warning" layoutX="28.0" layoutY="426.0" prefHeight="17.0" prefWidth="26.0" />
+            <Label fx:id="label_warning" layoutX="28.0" layoutY="415.0" prefHeight="67.0" prefWidth="369.0" wrapText="true" />
          </children></Pane>
     </children>
 </AnchorPane>

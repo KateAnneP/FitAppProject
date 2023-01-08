@@ -10,9 +10,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.awt.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +29,8 @@ import java.util.ResourceBundle;
 public class MainViewController implements Initializable {
 
     @FXML public AnchorPane anchorPane;
+    @FXML public Pane pane;
+    @FXML public Pane pane1;
     @FXML public MenuItem menuOpt_baza;
     @FXML public MenuItem menuOpt_plik;
     @FXML public MenuButton menu_kalorycznosc;
@@ -27,6 +38,9 @@ public class MainViewController implements Initializable {
     @FXML public Button button_wyjscie;
     @FXML public Button button_bmi;
     @FXML public Button button_wyloguj;
+    @FXML public Label label_powitanie;
+    @FXML public Label label_uwaga;
+    @FXML public ImageView img;
 
 
     @FXML
@@ -36,6 +50,7 @@ public class MainViewController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("FitApp");
+        scene.getStylesheets().add("style.css");
         stage.show();
     }
 
@@ -51,6 +66,7 @@ public class MainViewController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("FitApp");
+        scene.getStylesheets().add("style.css");
         stage.show();
     }
 
@@ -74,6 +90,8 @@ public class MainViewController implements Initializable {
         Stage stage = (Stage)anchorPane.getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle("FitApp");
+        scene.getStylesheets().add("style.css");
+        anchorPane.getStyleClass().add("anchorPane");
         stage.show();
     }
 
@@ -86,6 +104,7 @@ public class MainViewController implements Initializable {
         Stage stage = (Stage)anchorPane.getScene().getWindow();
         stage.setScene(scene);
         stage.setTitle("FitApp");
+        scene.getStylesheets().add("style.css");
         stage.show();
     }
 
@@ -93,14 +112,21 @@ public class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        MainApplication.suma = 0;
-        MainApplication.id_wybranych.clear();
+        anchorPane.getStyleClass().add("anchorPane");
+        pane.getStyleClass().add("pane");
+        pane1.getStyleClass().add("pane");
+        KalorycznoscZBazyViewController.suma = 0;
         if(MainApplication.zalogowane)
         {
             menuOpt_plik.setDisable(false);
             menuOpt_baza.setDisable(false);
             button_zaloguj.setVisible(false);
             button_wyloguj.setVisible(true);
+            label_powitanie.setText("Witaj " + LoginViewController.login + "! Teraz możesz korzystać z wszystkich opcji aplikacji bez ograniczeń");
+            label_uwaga.setVisible(false);
+
+            Image image = new Image("sushi.png");
+            img.setImage(image);
         }
         else {
             button_wyloguj.setVisible(false);
@@ -108,6 +134,11 @@ public class MainViewController implements Initializable {
             menuOpt_baza.setDisable(true);
             Tooltip tooltip1 = new Tooltip("Te opcje są dostępne po zalogowaniu");
             menu_kalorycznosc.setTooltip(tooltip1);
+            label_powitanie.setText("Witaj w programie! \n Rozpocznij swoją przygodę ze zdrowym odżywianiem razem z nami!");
+            label_uwaga.setVisible(true);
+
+            Image image = new Image("ciasto.png");
+            img.setImage(image);
         }
 
     }
