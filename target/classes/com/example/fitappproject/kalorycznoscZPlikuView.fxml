@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.text.Font?>
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.fitappproject.KalorycznoscZPlikuViewController" prefHeight="500.0" prefWidth="700.0">
+<AnchorPane fx:id="anchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fitappproject.KalorycznoscZPlikuViewController">
     <children>
-        <Pane prefHeight="500.0" prefWidth="180.0">
+        <Pane fx:id="pane" prefHeight="500.0" prefWidth="180.0">
             <children>
                 <Button fx:id="button_bmi" layoutY="14.0" mnemonicParsing="false" onAction="#obliczBMIAction" prefHeight="44.0" prefWidth="180.0" text="Oblicz BMI">
                     <font>
@@ -19,7 +16,7 @@
                     <font>
                         <Font size="14.0" />
                     </font></Button>
-                <Button fx:id="button_zaloguj" layoutY="383.0" mnemonicParsing="false" onAction="#zalogujAction" prefHeight="44.0" prefWidth="180.0" text="Zaloguj się">
+                <Button fx:id="button_wyloguj" layoutY="383.0" mnemonicParsing="false" onAction="#wylogujAction" prefHeight="44.0" prefWidth="180.0" text="Wyloguj">
                     <font>
                         <Font size="14.0" />
                     </font></Button>
@@ -34,6 +31,30 @@
                 </MenuButton>
             </children>
         </Pane>
-        <Pane layoutX="195.0" prefHeight="500.0" prefWidth="505.0" />
+        <Pane fx:id="pane1" layoutX="195.0" prefHeight="500.0" prefWidth="505.0">
+         <children>
+            <Button fx:id="button_wczytaj" layoutX="27.0" layoutY="13.0" mnemonicParsing="false" onAction="#wczytajAction" prefHeight="44.0" prefWidth="226.0" text="Wczytaj dane z pliku...">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Label layoutX="316.0" layoutY="18.0" prefHeight="79.0" prefWidth="166.0" text="Aby obliczyć sumę kalorii w żywności, wybierz plik z danymi z dysku." textAlignment="LEFT" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tabela_dane" layoutX="27.0" layoutY="76.0" prefHeight="334.0" prefWidth="257.0">
+              <columns>
+                <TableColumn fx:id="kolumna_nazwa" prefWidth="137.0" text="nazwa" />
+                <TableColumn fx:id="kolumna_ilosc" prefWidth="69.0" text="ilość" />
+                  <TableColumn fx:id="kolumna_kalorie" prefWidth="50.0" text="kalorie" />
+              </columns>
+            </TableView>
+            <Label fx:id="label_wynik" layoutX="27.0" layoutY="432.0" prefHeight="44.0" prefWidth="446.0" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children></Pane>
     </children>
 </AnchorPane>

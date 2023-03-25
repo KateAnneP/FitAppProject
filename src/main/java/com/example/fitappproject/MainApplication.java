@@ -17,7 +17,7 @@ public class MainApplication extends Application {
     public static boolean zalogowane = false;
     public static ObservableList<Potrawa> potrawy = FXCollections.observableArrayList();
     public static ObservableList<Wybrana_potrawa> id_wybranych = FXCollections.observableArrayList();
-    public static int suma = 0;
+    public static int otworzen = 0;
 
     private void setupSql() {
 
@@ -40,6 +40,7 @@ public class MainApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 700, 500);
         stage.setTitle("FitApp");
         stage.setScene(scene);
+        scene.getStylesheets().add("style.css");
         stage.show();
     }
 

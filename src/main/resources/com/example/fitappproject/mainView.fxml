@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fitappproject.MainViewController">
    <children>
-      <Pane prefHeight="500.0" prefWidth="180.0">
+      <Pane fx:id="pane" prefHeight="500.0" prefWidth="180.0">
          <children>
             <Button fx:id="button_bmi" layoutY="14.0" mnemonicParsing="false" onAction="#obliczBMIAction" prefHeight="44.0" prefWidth="180.0" text="Oblicz BMI">
                <font>
@@ -36,6 +37,22 @@
             </Button>
          </children>
       </Pane>
-      <Pane layoutX="195.0" prefHeight="500.0" prefWidth="505.0" />
+      <Pane fx:id="pane1" layoutX="195.0" prefHeight="500.0" prefWidth="505.0">
+         <children>
+            <Label fx:id="label_powitanie" layoutX="65.0" layoutY="250.0" prefHeight="75.0" prefWidth="366.0" text="Label" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <Label fx:id="label_uwaga" layoutX="14.0" layoutY="450.0" prefHeight="29.0" prefWidth="454.0" text="Uwaga: Niektóre funkcje są dostępne tylko dla zalogowanych użytkowników" />
+            <ImageView fx:id="img" fitHeight="150.0" fitWidth="200.0" layoutX="166.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../ciasto.png" />
+               </image></ImageView>
+            <Label layoutX="206.0" layoutY="35.0" text="FitApp">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children></Pane>
    </children>
 </AnchorPane>
